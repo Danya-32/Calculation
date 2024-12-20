@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -81,6 +81,96 @@ namespace Team_Work
             {
                 MessageBox.Show("Invalid input! Please enter valid numbers.");
             }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            TextBoxResult.Clear();
+        }
+
+        private void btnSqrt_Click(object sender, EventArgs e)
+        {
+            double number = GetInput();
+            DisplayResult(Math.Sqrt(number));
+        }
+
+        private void btnSin_Click(object sender, EventArgs e)
+        {
+            double number = GetInput();
+            DisplayResult(Math.Sin(number));
+        }
+
+        private void btnCos_Click(object sender, EventArgs e)
+        {
+            double number = GetInput();
+            DisplayResult(Math.Cos(number));
+        }
+
+        private void btnPow_Click(object sender, EventArgs e)
+        {
+            string input = TextBoxResult.Text;
+            string[] parts = input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length != 3)
+            {
+                MessageBox.Show("Please enter a valid expression for power (e.g., 2 ^ 3).");
+                return;
+            }
+
+            if (double.TryParse(parts[0], NumberStyles.Any, CultureInfo.InvariantCulture, out double baseNumber) &&
+                double.TryParse(parts[2], NumberStyles.Any, CultureInfo.InvariantCulture, out double exponent))
+            {
+                double result = Math.Pow(baseNumber, exponent);
+                DisplayResult(result);
+            }
+            else
+            {
+                MessageBox.Show("Invalid input for power operation!");
+            }
+        }
+
+        private void btnFloor_Click(object sender, EventArgs e)
+        {
+            double number = GetInput();
+            DisplayResult(Math.Floor(number));
+        }
+
+        private void btnCeil_Click(object sender, EventArgs e)
+        {
+            double number = GetInput();
+            DisplayResult(Math.Ceiling(number));
+        }
+
+        private void btnMemoryAdd_Click(object sender, EventArgs e)
+        {
+            memory += GetInput();
+            TextBoxResult.Text = "Memory: " + memory;
+        }
+
+        private void btnMemoryClear_Click(object sender, EventArgs e)
+        {
+            memory = 0;
+            TextBoxResult.Text = "Memory cleared.";
+        }
+
+        private void btnMemoryRecall_Click(object sender, EventArgs e)
+        {
+            DisplayResult(memory);
+        }
+
+        private double GetInput()
+        {
+            double number;
+            if (double.TryParse(TextBoxResult.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out number))
+            {
+                return number;
+            }
+            MessageBox.Show("Invalid input! Please enter a valid number.");
+            return 0;
+        }
+
+        private void DisplayResult(double result)
+        {
+            TextBoxResult.Text = result.ToString();
         }
     }
 }
