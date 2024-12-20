@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using SimpleCalculatorTests;
 
 [TestFixture]
 public class CalculatorTests
